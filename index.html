@@ -6,589 +6,458 @@
   <title>La Lina Moda</title>
   <style>
     :root {
-      --bg-brown: #6B554B;
-      --bg-brown-light: #524037;
-      --bg-app: #F8F6F3;
-      --text-dark: #3A2E2B;
+      --bg-marrom: #6B554B;
+      --bg-marrom-claro: #524037;
+      --aplicativo-de-fundo: #F8F6F3;
+      --texto-escuro: #3A2E2B;
       --card-bg: #FFFFFF;
-      --border-color: #E5DFC9;
-      --btn-brown: #6B554B;
-      --btn-brown-hover: #524037;
-      --accent-gold: #C5A059;
+      --cor-da-borda: #E5DFC9;
+      --primary: #6B554B;
+      --primary-hover: #524037;
+      --gold: #C5A059;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background-color: var(--bg-app); color: var(--text-dark); }
-
-    /* Portal Inicial */
-    .portal-container { min-height: 100vh; background-color: var(--bg-brown); display: flex; align-items: center; justify-content: center; padding: 20px; }
-    .portal-box { text-align: center; max-width: 400px; width: 100%; color: #fff; }
-    .portal-logo { width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--accent-gold); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 22px; font-family: serif; color: var(--accent-gold); background: rgba(0,0,0,0.2); }
-    .portal-title { font-family: serif; font-size: 24px; color: var(--accent-gold); margin-bottom: 8px; }
-    .portal-desc { font-size: 13px; color: #EFECE9; margin-bottom: 25px; opacity: 0.9; }
-    .btn-portal { width: 100%; padding: 14px; border-radius: 25px; border: none; margin-bottom: 12px; cursor: pointer; font-weight: bold; font-size: 14px; }
-    .btn-portal-admin { background: var(--accent-gold); color: #3A2E2B; }
-    .btn-portal-client { background: #FFFFFF; color: #3A2E2B; }
-
-    /* Layout Administrador */
-    .admin-layout { display: flex; min-height: 100vh; }
-    .admin-sidebar { width: 240px; background: var(--bg-brown); color: #fff; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
-    .admin-brand { font-family: serif; font-size: 20px; font-weight: bold; margin-bottom: 4px; color: var(--accent-gold); }
-    .admin-sub { font-size: 11px; opacity: 0.8; margin-bottom: 25px; color: #EFECE9; }
-    .admin-menu { list-style: none; }
-    .admin-menu li { padding: 12px 15px; border-radius: 8px; font-size: 14px; cursor: pointer; margin-bottom: 6px; }
-    .admin-menu li.active { background: var(--bg-brown-light); font-weight: bold; }
-    .admin-footer-links { font-size: 11px; opacity: 0.8; line-height: 1.6; color: #EFECE9; }
-    .admin-footer-links a { color: #fff; text-decoration: underline; margin-right: 8px; cursor: pointer; }
-    .admin-footer-links a:hover { color: var(--accent-gold); }
-
-    .admin-content { flex: 1; padding: 30px; background: #FAF8F5; }
-    .admin-header { font-size: 22px; font-family: serif; font-weight: bold; margin-bottom: 4px; color: var(--text-dark); }
-    .admin-subtitle { font-size: 13px; color: #666; margin-bottom: 20px; }
-    
-    .form-card { background: #fff; padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); max-width: 800px; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    .form-group { margin-bottom: 12px; }
-    .form-group.full { grid-column: 1 / -1; }
-    label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #444; }
-    input, select { width: 100%; padding: 10px; border: 1px solid #DDD; border-radius: 6px; font-size: 13px; }
-    
-    /* Layout Cliente */
-    .client-layout { max-width: 1100px; margin: 0 auto; padding: 20px; }
-    .client-header { background: var(--bg-brown); color: #fff; padding: 20px 25px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .client-title { font-family: serif; font-size: 24px; font-weight: bold; color: var(--accent-gold); }
-    .client-sub { font-size: 12px; color: #EFECE9; margin-top: 3px; opacity: 0.9; }
-    .client-header-links { display: flex; gap: 15px; }
-    .client-header-link { font-size: 13px; color: #fff; font-weight: bold; text-decoration: underline; cursor: pointer; }
-    .client-header-link:hover { color: var(--accent-gold); }
-    
-    .filter-bar { display: flex; gap: 10px; margin-bottom: 20px; }
-    .filter-bar input { flex: 1; }
-    .filter-bar select { width: 200px; }
-
-    .client-main { display: grid; grid-template-columns: 1fr 300px; gap: 20px; }
-    @media (max-width: 768px) {
-      .client-main { grid-template-columns: 1fr; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    
-    .catalog-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
-    
-    .product-card { background: #fff; border-radius: 10px; border: 1px solid #EAEAEA; overflow: hidden; position: relative; }
-    .product-img-wrapper { position: relative; width: 100%; height: 260px; overflow: hidden; }
-    .product-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-    .btn-zoom { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: #fff; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-    
-    .product-info { padding: 12px; }
-    .product-name { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
-    .product-price { font-size: 15px; font-weight: bold; color: var(--btn-brown); margin-bottom: 10px; }
-    .btn-add-cart { width: 100%; padding: 8px; background: var(--btn-brown); color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; transition: background 0.2s; }
-    .btn-add-cart:hover { background: var(--btn-brown-hover); }
 
-    .cart-box { background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #EAEAEA; height: fit-content; }
-    .cart-title { font-weight: bold; font-size: 15px; margin-bottom: 15px; color: var(--btn-brown); }
-    .cart-empty { font-size: 12px; color: #888; margin-bottom: 15px; }
-    .cart-total { display: flex; justify-content: space-between; font-weight: bold; margin: 15px 0; font-size: 14px; }
+    body {
+      background-color: var(--aplicativo-de-fundo);
+      color: var(--texto-escuro);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-    /* Modais */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-    .modal.active { display: flex; }
-    .modal-content { background: #fff; padding: 25px; border-radius: 12px; max-width: 400px; width: 100%; position: relative; }
-    .modal-img-content { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 8px; }
-    .close-modal { position: absolute; top: 10px; right: 15px; font-size: 22px; cursor: pointer; color: #333; font-weight: bold; }
+    /* Cabeçalho do Cliente */
+    header {
+      background-color: var(--bg-marrom);
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 
-    .btn-main { background: var(--btn-brown); color: #fff; padding: 12px 20px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
-    .btn-main:hover { background: var(--btn-brown-hover); }
-    .btn-secondary { background: #F0F0F0; color: #333; padding: 12px 20px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+    header .logo-container h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 28px;
+      color: #E5DFC9;
+    }
 
-    .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--btn-brown); color: #fff; padding: 12px 24px; border-radius: 25px; font-size: 13px; display: none; z-index: 2000; }
+    header .logo-container p {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    header nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Layout Principal */
+    .main-container {
+      display: flex;
+      flex: 1;
+      max-width: 1200px;
+      margin: 20px auto;
+      width: 100%;
+      gap: 20px;
+      padding: 0 10px;
+    }
+
+    /* Vitrine e Conteúdo */
+    .content-area {
+      flex: 3;
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .search-bar input, .search-bar select {
+      padding: 10px;
+      border: 1px solid #CCC;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    .search-bar input {
+      flex: 1;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #EEE;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    .product-price {
+      color: var(--primary);
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .btn-add {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: auto;
+    }
+
+    .btn-add:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-delete {
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .btn-delete:hover {
+      background-color: #c9302c;
+    }
+
+    /* Carrinho Sidebar */
+    .cart-sidebar {
+      flex: 1;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      height: fit-content;
+    }
+
+    .cart-sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    /* Admin Panel Layout */
+    .admin-container {
+      display: none;
+      width: 100%;
+      max-width: 1200px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .admin-sidebar {
+      width: 220px;
+      background: var(--bg-marrom);
+      color: white;
+      padding: 20px 0;
+    }
+
+    .admin-sidebar button {
+      width: 100%;
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      color: white;
+      text-align: left;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .admin-sidebar button.active, .admin-sidebar button:hover {
+      background: rgba(255,255,255,0.15);
+      font-weight: bold;
+    }
+
+    .admin-content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #CCC;
+      border-radius: 6px;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .admin-table th, .admin-table td {
+      border: 1px solid #DDD;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .admin-table th {
+      background-color: var(--aplicativo-de-fundo);
+    }
   </style>
 </head>
 <body>
 
-<!-- Portal de Entrada -->
-<div id="viewPortal" class="portal-container">
-  <div class="portal-box">
-    <div class="portal-logo">LL</div>
-    <h1 class="portal-title">La Lina Moda</h1>
-    <p class="portal-desc">Moda feminina com estilo e elegância para mulheres que gostam de se destacar.</p>
-    <button class="btn-portal btn-portal-admin" onclick="requestAdminAccess()">Área do administrador</button>
-    <button class="btn-portal btn-portal-client" onclick="switchView('client')">Sou cliente</button>
-  </div>
-</div>
-
-<!-- Área do Administrador -->
-<div id="viewAdmin" style="display: none;" class="admin-layout">
-  <div class="admin-sidebar">
-    <div>
-      <div class="admin-brand">La Lina Moda</div>
-      <div class="admin-sub">Moda Feminina · Estoque<br>(98) 98421-0131</div>
-      <ul class="admin-menu">
-        <li onclick="switchView('client')">Painel</li>
-        <li onclick="switchView('client')">Produtos</li>
-        <li onclick="switchView('client')">Pedidos</li>
-        <li class="active">Adicionar item</li>
-      </ul>
+  <!-- Cabeçalho Principal -->
+  <header>
+    <div class="logo-container">
+      <h1>La Lina Moda</h1>
+      <p>Escolha as peças e monte seu pedido. · (98) 98421-0131</p>
     </div>
-    <div class="admin-footer-links">
-      Os dados ficam salvos automaticamente.<br><br>
-      <a onclick="switchView('portal')">Página inicial</a>
-      <a onclick="openChangePasswordModal()">Trocar senha</a>
-      <a onclick="switchView('portal')">Sair do painel</a>
+    <nav>
+      <a onclick="showView('client')">Página inicial</a>
+      <a onclick="showView('admin')">Área do administrador</a>
+    </nav>
+  </header>
+
+  <!-- Visão do Cliente -->
+  <div id="client-view" class="main-container">
+    <div class="content-area">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Buscar por nome" oninput="filterProducts()">
+        <select id="category-select" onchange="filterProducts()">
+          <option value="">Todas as categorias</option>
+        </select>
+      </div>
+      <div class="products-grid" id="products-container">
+        <!-- Produtos da vitrine serão carregados aqui -->
+      </div>
+    </div>
+
+    <div class="cart-sidebar">
+      <h2>Seu carrinho</h2>
+      <div id="cart-items">
+        <p style="color: #888; font-size: 14px;">Seu carrinho está vazio.</p>
+      </div>
+      <hr style="margin: 15px 0; border: 0; border-top: 1px solid #EEE;">
+      <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px;">
+        <span>Total</span>
+        <span id="cart-total">R$ 0,00</span>
+      </div>
+      <button class="btn-add" style="width: 100%; text-align: center;" onclick="sendOrder()">Enviar pedido</button>
     </div>
   </div>
 
-  <div class="admin-content">
-    <div class="admin-header">Adicionar item</div>
-    <div class="admin-subtitle">Preencha os dados da peça.</div>
+  <!-- Painel do Administrador -->
+  <div id="admin-view" class="admin-container">
+    <div class="admin-sidebar">
+      <button onclick="showAdminTab('list')" class="active">Produtos</button>
+      <button onclick="showAdminTab('add')">Adicionar item</button>
+    </div>
 
-    <div class="form-card">
-      <form id="formAdminProduct">
-        <div class="form-group full">
-          <label>Foto da peça (opcional)</label>
-          <input type="file" id="admFoto" accept="image/*">
-        </div>
+    <div class="admin-content">
+      <!-- Lista de Produtos (Admin) -->
+      <div id="tab-list">
+        <h2>Produtos Cadastrados</h2>
+        <p style="margin-bottom: 15px; color: #666;">Gerencie e exclua os itens da sua loja.</p>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Imagem</th>
+              <th>Nome</th>
+              <th>Preço</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="admin-products-table">
+            <!-- Tabela preenchida via JS -->
+          </tbody>
+        </table>
+      </div>
 
-        <div class="form-group full">
-          <label>Nome da peça</label>
-          <input type="text" id="admNome" placeholder="Vestido floral manga longa" required>
-        </div>
-
-        <div class="form-grid">
+      <!-- Form de Adicionar Item -->
+      <div id="tab-add" style="display: none;">
+        <h2>Adicionar item</h2>
+        <p style="margin-bottom: 20px; color: #666;">Preencha os dados da peça.</p>
+        <form id="add-product-form" onsubmit="saveProduct(event)">
+          <div class="form-group">
+            <label>Nome da peça</label>
+            <input type="text" id="p-nome" required>
+          </div>
           <div class="form-group">
             <label>Categoria</label>
-            <input type="text" id="admCategoria" placeholder="Vestidos, Calças, Blusas...">
-          </div>
-          <div class="form-group">
-            <label>Código / SKU</label>
-            <input type="text" id="admSku" placeholder="VF-001">
-          </div>
-          <div class="form-group">
-            <label>Código de barras (opcional)</label>
-            <input type="text" id="admBarcode" placeholder="7891234567890">
-          </div>
-          <div class="form-group">
-            <label>Tamanho</label>
-            <input type="text" id="admTamanho" placeholder="P, M, G ou 38, 40...">
-          </div>
-          <div class="form-group">
-            <label>Cor</label>
-            <input type="text" id="admCor" placeholder="Azul marinho">
-          </div>
-          <div class="form-group">
-            <label>Quantidade em estoque</label>
-            <input type="number" id="admQtd" placeholder="0" required>
-          </div>
-          <div class="form-group">
-            <label>Estoque mínimo (alerta)</label>
-            <input type="number" id="admMinQtd" placeholder="3">
+            <input type="text" id="p-categoria">
           </div>
           <div class="form-group">
             <label>Preço de venda (R$)</label>
-            <input type="number" step="0.01" id="admPreco" placeholder="0,00" required>
+            <input type="number" step="0.01" id="p-preco" required>
           </div>
-        </div>
-
-        <div style="margin-top: 20px; display: flex; gap: 10px;">
-          <button type="submit" id="btnSaveProduct" class="btn-main">Salvar item</button>
-          <button type="button" class="btn-secondary" onclick="document.getElementById('formAdminProduct').reset()">Cancelar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- Área do Cliente -->
-<div id="viewClient" style="display: none;" class="client-layout">
-  <div class="client-header">
-    <div>
-      <div class="client-title">La Lina Moda</div>
-      <div class="client-sub">Escolha as peças e monte seu pedido. · (98) 98421-0131</div>
-    </div>
-    <div class="client-header-links">
-      <a class="client-header-link" onclick="switchView('portal')">Página inicial</a>
-      <a class="client-header-link" onclick="requestAdminAccess()">Área do administrador</a>
+          <div class="form-group">
+            <label>Link da Foto (URL)</label>
+            <input type="url" id="p-foto" placeholder="https://...">
+          </div>
+          <button type="submit" class="btn-add">Salvar Produto</button>
+        </form>
+      </div>
     </div>
   </div>
 
-  <div class="filter-bar">
-    <input type="text" id="clientSearch" placeholder="Buscar por nome" oninput="filterCatalog()">
-    <select id="clientCategory" onchange="filterCatalog()">
-      <option value="">Todas as categorias</option>
-    </select>
-  </div>
+  <script>
+    let APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzDgcbPcnlibvxdMu3aWKxn2fViMF037A1T1_b1-LqA-XYGYpjauRifGLsgRXTPAX2_/exec';
+    let products = [];
 
-  <div class="client-main">
-    <div id="catalogContainer" class="catalog-list"></div>
-
-    <div class="cart-box">
-      <div class="cart-title">Seu carrinho</div>
-      <div id="cartItemsList" class="cart-empty">Seu carrinho está vazio.</div>
-      <div class="cart-total">
-        <span>Total</span>
-        <span id="cartTotalValue">R$ 0,00</span>
-      </div>
-      <button class="btn-main" style="width: 100%;" onclick="openCheckoutModal()">Enviar pedido</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal de Senha do Administrador -->
-<div id="modalPassword" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closePasswordModal()">&times;</span>
-    <h3 style="margin-bottom: 10px; font-family: serif; color: var(--btn-brown);">Acesso Restrito</h3>
-    <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Digite a senha de administrador para continuar.</p>
-    <form onsubmit="verifyPassword(event)">
-      <div class="form-group">
-        <label>Senha</label>
-        <input type="password" id="adminPasswordInput" required placeholder="Digite sua senha">
-      </div>
-      <button type="submit" class="btn-main" style="width: 100%; margin-top: 10px;">Entrar</button>
-    </form>
-  </div>
-</div>
-
-<!-- Modal de Alterar Senha -->
-<div id="modalChangePassword" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeChangePasswordModal()">&times;</span>
-    <h3 style="margin-bottom: 10px; font-family: serif; color: var(--btn-brown);">Alterar Senha</h3>
-    <form onsubmit="saveNewPassword(event)">
-      <div class="form-group">
-        <label>Senha Atual</label>
-        <input type="password" id="passAtual" required placeholder="Digite a senha atual">
-      </div>
-      <div class="form-group">
-        <label>Nova Senha</label>
-        <input type="password" id="passNova" required placeholder="Digite a nova senha">
-      </div>
-      <button type="submit" class="btn-main" style="width: 100%; margin-top: 10px;">Salvar Nova Senha</button>
-    </form>
-  </div>
-</div>
-
-<!-- Modal Zoom da Foto -->
-<div id="modalZoom" class="modal" onclick="closeZoomModal()">
-  <span class="close-modal" style="color: #fff; top: 20px; right: 25px;">&times;</span>
-  <img id="modalZoomImg" class="modal-img-content" src="" alt="Foto Ampliada">
-</div>
-
-<!-- Modal de Cadastro / Finalizar Pedido do Cliente -->
-<div id="modalCheckout" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
-    <h3 style="margin-bottom: 15px; font-family: serif; color: var(--btn-brown);">Dados do Cliente</h3>
-    <form id="formCheckout" onsubmit="sendOrderWhatsApp(event)">
-      <div class="form-group">
-        <label>Nome Completo</label>
-        <input type="text" id="cliNome" required placeholder="Digite seu nome completo">
-      </div>
-      <div class="form-group">
-        <label>CPF</label>
-        <input type="text" id="cliCpf" required placeholder="000.000.000-00">
-      </div>
-      <div class="form-group">
-        <label>Endereço de Entrega</label>
-        <input type="text" id="cliEndereco" required placeholder="Rua, Número, Bairro e Cidade">
-      </div>
-      <button type="submit" class="btn-main" style="width: 100%; margin-top: 10px;">Confirmar e Enviar via WhatsApp</button>
-    </form>
-  </div>
-</div>
-
-<div id="toast" class="toast"></div>
-
-<script>
-  let APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbys4jwgYOdIK06jFHUMmLDgFoXPkNMzxwrqO-7xY-tkeI2u-3b3vvZWvY003kg_krwh/exec';
-  let cart = [];
-  let globalProducts = [];
-
-  function getAdminPassword() {
-    return localStorage.getItem('lalina_admin_pass') || '1234';
-  }
-
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.innerText = msg;
-    t.style.display = 'block';
-    setTimeout(() => { t.style.display = 'none'; }, 3000);
-  }
-
-  function requestAdminAccess() {
-    document.getElementById('adminPasswordInput').value = '';
-    document.getElementById('modalPassword').classList.add('active');
-  }
-
-  function closePasswordModal() {
-    document.getElementById('modalPassword').classList.remove('active');
-  }
-
-  function verifyPassword(e) {
-    e.preventDefault();
-    const inputPass = document.getElementById('adminPasswordInput').value;
-    if (inputPass === getAdminPassword()) {
-      closePasswordModal();
-      switchView('admin');
-    } else {
-      showToast('Senha incorreta!');
-    }
-  }
-
-  function openChangePasswordModal() {
-    document.getElementById('passAtual').value = '';
-    document.getElementById('passNova').value = '';
-    document.getElementById('modalChangePassword').classList.add('active');
-  }
-
-  function closeChangePasswordModal() {
-    document.getElementById('modalChangePassword').classList.remove('active');
-  }
-
-  function saveNewPassword(e) {
-    e.preventDefault();
-    const atual = document.getElementById('passAtual').value;
-    const nova = document.getElementById('passNova').value;
-
-    if (atual !== getAdminPassword()) {
-      showToast('A senha atual está incorreta!');
-      return;
+    function getAdminPassword() {
+      return localStorage.getItem('lalina_admin_pass') || '1234';
     }
 
-    if (nova.trim().length < 3) {
-      showToast('A nova senha deve ter pelo menos 3 caracteres.');
-      return;
-    }
-
-    localStorage.setItem('lalina_admin_pass', nova);
-    showToast('Senha alterada com sucesso!');
-    closeChangePasswordModal();
-  }
-
-  function switchView(view) {
-    document.getElementById('viewPortal').style.display = view === 'portal' ? 'flex' : 'none';
-    document.getElementById('viewAdmin').style.display = view === 'admin' ? 'flex' : 'none';
-    document.getElementById('viewClient').style.display = view === 'client' ? 'block' : 'none';
-    if(view === 'client') fetchProductsFromSheet();
-  }
-
-  // Carrega produtos da planilha na inicialização
-  async function fetchProductsFromSheet() {
-    const container = document.getElementById('catalogContainer');
-    container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">Carregando produtos...</p>';
-    
-    try {
-      const res = await fetch(APPS_SCRIPT_URL);
-      const data = await res.json();
-      if (Array.isArray(data) && data.length > 0) {
-        globalProducts = data;
-        localStorage.setItem('lalina_products', JSON.stringify(data));
+    function showView(view) {
+      if (view === 'admin') {
+        let pass = prompt('Digite a senha do administrador:');
+        if (pass !== getAdminPassword()) {
+          alert('Senha incorreta!');
+          return;
+        }
+        document.getElementById('client-view').style.display = 'none';
+        document.getElementById('admin-view').style.display = 'flex';
+        renderAdminTable();
       } else {
-        globalProducts = JSON.parse(localStorage.getItem('lalina_products') || '[]');
+        document.getElementById('client-view').style.display = 'flex';
+        document.getElementById('admin-view').style.display = 'none';
       }
-    } catch(err) {
-      console.log('Erro ao buscar online, usando local:', err);
-      globalProducts = JSON.parse(localStorage.getItem('lalina_products') || '[]');
     }
 
-    populateCategories();
-    filterCatalog();
-  }
-
-  function populateCategories() {
-    const select = document.getElementById('clientCategory');
-    const categories = [...new Set(globalProducts.map(p => p.categoria).filter(Boolean))];
-    select.innerHTML = '<option value="">Todas as categorias</option>' + 
-      categories.map(c => `<option value="${c}">${c}</option>`).join('');
-  }
-
-  function filterCatalog() {
-    const container = document.getElementById('catalogContainer');
-    const search = document.getElementById('clientSearch').value.toLowerCase();
-    const category = document.getElementById('clientCategory').value;
-
-    let filtered = globalProducts.filter(p => {
-      const matchName = (p.nome || '').toLowerCase().includes(search);
-      const matchCat = category === '' || p.categoria === category;
-      return matchName && matchCat;
-    });
-
-    if (filtered.length === 0) {
-      container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">Nenhum produto cadastrado.</p>';
-      return;
+    function showAdminTab(tab) {
+      document.getElementById('tab-list').style.display = tab === 'list' ? 'block' : 'none';
+      document.getElementById('tab-add').style.display = tab === 'add' ? 'block' : 'none';
+      if (tab === 'list') renderAdminTable();
     }
 
-    container.innerHTML = filtered.map((p, idx) => `
-      <div class="product-card">
-        <div class="product-img-wrapper">
-          <img src="${p.foto || 'https://via.placeholder.com/300?text=Sem+Foto'}" alt="${p.nome}">
-          <button class="btn-zoom" onclick="zoomImage('${p.foto}')" title="Ampliar Foto">🔍</button>
-        </div>
-        <div class="product-info">
-          <div class="product-name">${p.nome}</div>
-          <div class="product-price">R$ ${Number(p.preco || 0).toFixed(2)}</div>
-          <button class="btn-add-cart" onclick="addToCart(${idx})">Adicionar ao carrinho</button>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  function resizeImage(file, maxDim, quality) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.onload = function() {
-          let width = img.width, height = img.height;
-          if (width > maxDim || height > maxDim) {
-            if (width >= height) { height = Math.round(height * (maxDim / width)); width = maxDim; }
-            else { width = Math.round(width * (maxDim / height)); height = maxDim; }
+    // Carregar Produtos da Planilha
+    function loadProducts() {
+      fetch(APPS_SCRIPT_URL)
+        .then(res => res.json())
+        .then(data => {
+          if (Array.isArray(data)) {
+            products = data;
+          } else if (data.produtos) {
+            products = data.produtos;
           }
-          const canvas = document.createElement('canvas');
-          canvas.width = width; canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-          resolve(canvas.toDataURL('image/jpeg', quality));
-        };
-        img.onerror = () => reject(new Error('Erro imagem'));
-        img.src = e.target.result;
-      };
-      reader.onerror = () => reject(new Error('Erro arquivo'));
-      reader.readAsDataURL(file);
-    });
-  }
+          renderProducts(products);
+        })
+        .catch(err => console.log('Aguardando envio ou erro ao carregar:', err));
+    }
 
-  document.getElementById('formAdminProduct').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btnSave = document.getElementById('btnSaveProduct');
-    btnSave.disabled = true;
-    btnSave.innerText = 'Salvando...';
+    function renderProducts(items) {
+      const container = document.getElementById('products-container');
+      container.innerHTML = '';
+      items.forEach(p => {
+        container.innerHTML += `
+          <div class="product-card">
+            <img src="${p.foto || p.imagem || 'https://via.placeholder.com/250'}" alt="${p.nome}">
+            <div class="product-info">
+              <div class="product-title">${p.nome}</div>
+              <div class="product-price">R$ ${parseFloat(p.preco || 0).toFixed(2)}</div>
+              <button class="btn-add" onclick="addToCart('${p.nome}')">Adicionar ao carrinho</button>
+            </div>
+          </div>
+        `;
+      });
+    }
 
-    const fileInput = document.getElementById('admFoto');
-    let fotoUrl = '';
+    function renderAdminTable() {
+      const tbody = document.getElementById('admin-products-table');
+      tbody.innerHTML = '';
+      products.forEach(p => {
+        tbody.innerHTML += `
+          <tr>
+            <td><img src="${p.foto || p.imagem || 'https://via.placeholder.com/50'}" width="50" height="50" style="object-fit:cover; border-radius:4px;"></td>
+            <td><b>${p.nome}</b></td>
+            <td>R$ ${parseFloat(p.preco || 0).toFixed(2)}</td>
+            <td>
+              <button class="btn-delete" onclick="deletarProduto('${p.nome}')">Excluir</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
 
-    if (fileInput.files.length > 0) {
-      showToast('Enviando foto...');
-      try {
-        const base64Data = await resizeImage(fileInput.files[0], 1000, 0.7);
-        const res = await fetch(APPS_SCRIPT_URL, {
+    function deletarProduto(nomeProduto) {
+      if (confirm('Tem certeza que deseja excluir o produto: ' + nomeProduto + '?')) {
+        fetch(APPS_SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ type: 'upload_image', data: base64Data, mimeType: 'image/jpeg' })
-        });
-        const data = await res.json();
-        if (data.url) fotoUrl = data.url;
-      } catch (err) {
-        showToast('Erro ao salvar foto.');
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ acao: 'deletar', nome: nomeProduto })
+        }).then(() => {
+          alert('Solicitação de exclusão enviada!');
+          location.reload();
+        }).catch(err => alert('Erro ao excluir: ' + err));
       }
     }
 
-    const produto = {
-      type: 'add_product',
-      nome: document.getElementById('admNome').value,
-      categoria: document.getElementById('admCategoria').value,
-      preco: parseFloat(document.getElementById('admPreco').value),
-      foto: fotoUrl || 'https://via.placeholder.com/300?text=Sem+Foto'
-    };
-
-    // Salva no backend do Google Apps Script
-    try {
-      await fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(produto)
-      });
-    } catch(e) {
-      console.log('Erro ao salvar no Apps Script', e);
+    function filterProducts() {
+      const search = document.getElementById('search-input').value.toLowerCase();
+      const filtered = products.filter(p => p.nome.toLowerCase().includes(search));
+      renderProducts(filtered);
     }
 
-    // Salva localmente também
-    globalProducts.push(produto);
-    localStorage.setItem('lalina_products', JSON.stringify(globalProducts));
-
-    btnSave.disabled = false;
-    btnSave.innerText = 'Salvar item';
-    showToast('Item salvo com sucesso!');
-    document.getElementById('formAdminProduct').reset();
-  });
-
-  function zoomImage(url) {
-    if(!url || url.includes('placeholder')) return;
-    document.getElementById('modalZoomImg').src = url;
-    document.getElementById('modalZoom').classList.add('active');
-  }
-
-  function closeZoomModal() {
-    document.getElementById('modalZoom').classList.remove('active');
-  }
-
-  function addToCart(idx) {
-    cart.push(globalProducts[idx]);
-    updateCartUI();
-    showToast('Item adicionado!');
-  }
-
-  function updateCartUI() {
-    const list = document.getElementById('cartItemsList');
-    const totalEl = document.getElementById('cartTotalValue');
-    if (cart.length === 0) {
-      list.innerHTML = 'Seu carrinho está vazio.';
-      totalEl.innerText = 'R$ 0,00';
-      return;
-    }
-
-    let total = 0;
-    list.innerHTML = cart.map((item) => {
-      const preco = Number(item.preco || 0);
-      total += preco;
-      return `<div style="display:flex; justify-content:space-between; margin-bottom: 5px; font-size: 13px;">
-        <span>${item.nome}</span>
-        <strong>R$ ${preco.toFixed(2)}</strong>
-      </div>`;
-    }).join('');
-
-    totalEl.innerText = `R$ ${total.toFixed(2)}`;
-  }
-
-  function openCheckoutModal() {
-    if (cart.length === 0) {
-      showToast('Adicione itens antes de enviar!');
-      return;
-    }
-    document.getElementById('modalCheckout').classList.add('active');
-  }
-
-  function closeCheckoutModal() {
-    document.getElementById('modalCheckout').classList.remove('active');
-  }
-
-  function sendOrderWhatsApp(e) {
-    e.preventDefault();
-    const nome = document.getElementById('cliNome').value;
-    const cpf = document.getElementById('cliCpf').value;
-    const endereco = document.getElementById('cliEndereco').value;
-
-    let texto = `*Novo Pedido - La Lina Moda*\n\n`;
-    texto += `*Cliente:* ${nome}\n`;
-    texto += `*CPF:* ${cpf}\n`;
-    texto += `*Endereço:* ${endereco}\n\n`;
-    texto += `*Itens do Pedido:*\n`;
-
-    let total = 0;
-    cart.forEach(item => {
-      const preco = Number(item.preco || 0);
-      texto += `- ${item.nome}: R$ ${preco.toFixed(2)}\n`;
-      total += preco;
-    });
-
-    texto += `\n*Total:* R$ ${total.toFixed(2)}`;
-
-    const url = `https://wa.me/5598984210131?text=${encodeURIComponent(texto)}`;
-    window.open(url, '_blank');
-    closeCheckoutModal();
-  }
-
-  // Ao abrir o app, carrega produtos automaticamente
-  fetchProductsFromSheet();
-</script>
+    window.onload = loadProducts;
+  </script>
 </body>
 </html>
+  
